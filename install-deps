@@ -175,28 +175,28 @@ elif [[ "$(uname)" == 'Linux' ]]; then
             echo "Some portion of the update is failed"
         fi
         # python-software-properties is required for apt-add-repository
-         apt-get install -y python-software-properties
+         apt-get install -y  software-properties-common
         echo "==> Found Ubuntu version ${ubuntu_major_version}.xx"
         if [[ $ubuntu_major_version -lt '12' ]]; then
             echo '==> Ubuntu version not supported.'
             exit 1
         elif [[ $ubuntu_major_version -lt '14' ]]; then # 12.xx
-            sudo -E add-apt-repository -y ppa:chris-lea/zeromq
+             -E add-apt-repository -y ppa:chris-lea/zeromq
         elif [[ $ubuntu_major_version -lt '15' ]]; then # 14.xx
-	    sudo -E apt-get install -y software-properties-common
-            sudo -E add-apt-repository -y ppa:jtaylor/ipython
+	     -E apt-get install -y software-properties-common
+             -E add-apt-repository -y ppa:jtaylor/ipython
         else
-            sudo apt-get install -y software-properties-common \
+             apt-get install -y software-properties-common \
                 libgraphicsmagick1-dev libfftw3-dev sox libsox-dev \
                 libsox-fmt-all
         fi
 
-        if sudo apt-get update ; then
+        if  apt-get update ; then
             echo "Updated successfully."
         else
             echo "Some portion of the update is failed"
         fi
-        sudo apt-get install -y build-essential gcc g++ curl \
+         apt-get install -y build-essential gcc g++ curl \
             cmake libreadline-dev git-core libqt4-dev libjpeg-dev \
             libpng-dev ncurses-dev imagemagick libzmq3-dev gfortran \
             unzip gnuplot gnuplot-x11 ipython
@@ -205,11 +205,11 @@ elif [[ "$(uname)" == 'Linux' ]]; then
                             cut -c 1)
         if [[ $gcc_major_version == '5' ]]; then
             echo '==> Found GCC 5, installing GCC 4.9.'
-            sudo apt-get install -y gcc-4.9 libgfortran-4.9-dev g++-4.9
+             apt-get install -y gcc-4.9 libgfortran-4.9-dev g++-4.9
         fi
 
         if [[ $ubuntu_major_version -lt '15' ]]; then
-            sudo apt-get install libqt4-core libqt4-gui
+             apt-get install libqt4-core libqt4-gui
         fi
 
         install_openblas || true
@@ -221,7 +221,7 @@ elif [[ "$(uname)" == 'Linux' ]]; then
         else
             echo "Some portion of the update is failed"
         fi
-        sudo apt-get install -y build-essential gcc g++ curl \
+         apt-get install -y build-essential gcc g++ curl \
             cmake libreadline-dev git-core libqt4-dev libjpeg-dev \
             libpng-dev ncurses-dev imagemagick libzmq3-dev gfortran \
             unzip gnuplot gnuplot-x11 ipython
@@ -229,18 +229,18 @@ elif [[ "$(uname)" == 'Linux' ]]; then
         install_openblas || true
 
     elif [[ $distribution == 'opensuse' ]]; then
-        if sudo zypper refresh ; then
+        if  zypper refresh ; then
             echo "Updated successfully."
         else
             echo "Some portion of the update failed"
         fi
-        sudo zypper install -y -t pattern devel_basis
+         zypper install -y -t pattern devel_basis
 	if [[ $opensuse_major_version == '42.2' ]]; then
-	    sudo zypper install -y gcc curl cmake readline-devel IPython git-core \
+	     zypper install -y gcc curl cmake readline-devel IPython git-core \
             	libqt4 libjpeg62-devel libpng16-compat-devel ImageMagick unzip \
             	gnuplot gcc-fortran libzmq5
 	else
-            sudo zypper install -y gcc curl cmake readline-devel IPython git-core \
+             zypper install -y gcc curl cmake readline-devel IPython git-core \
             	libqt4 libjpeg8-devel libpng15-compat-devel imagemagick unzip \
             	gnuplot gcc-fortran libzmq3
 	fi
@@ -252,13 +252,13 @@ elif [[ "$(uname)" == 'Linux' ]]; then
                       libqt4-dev libjpeg-dev libpng-dev ncurses-dev \
                       imagemagick libzmq3-dev gfortran unzip gnuplot \
                       gnuplot-x11 ipython )
-        if sudo apt-get update ; then
+        if  apt-get update ; then
             echo "Updated successfully."
         else
             echo "Some portion of the update is failed"
         fi
         # python-software-properties is required for apt-add-repository
-        sudo apt-get install -y python-software-properties
+         apt-get install -y python-software-properties
         if [[ $elementary_version == '0.3' ]]; then
             echo '==> Found Ubuntu version 14.xx based elementary installation, installing dependencies'
             sudo apt-get install -y software-properties-common \
